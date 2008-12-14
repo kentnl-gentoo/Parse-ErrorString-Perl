@@ -3,8 +3,9 @@
 use lib '../lib';
 
 use Test::Simple tests => 22;
-use Parse::ErrorString::Perl qw(parse_string);
+use Parse::ErrorString::Perl;
 
+my $parser = Parse::ErrorString::Perl->new;
 
 # use strict;
 # use warnings;
@@ -16,7 +17,7 @@ Global symbol "$hell" requires explicit package name at error.pl line 8.
 Execution of error.pl aborted due to compilation errors.
 ENDofMSG
 
-my @errors_compile = parse_string($msg_compile);
+my @errors_compile = $parser->parse_string($msg_compile);
 ok(@errors_compile, 'msg_compile results');
 ok($errors_compile[0]->message == 'Global symbol "$hell" requires explicit package name', 'msg_compile message');
 ok($errors_compile[0]->file == 'error.pl', 'msg_compile file');
@@ -37,7 +38,7 @@ Use of uninitialized value $empty in length at error.pl line 5.
 Illegal division by zero at error.pl line 8.
 ENDofMSG
 
-my @errors_runtime = parse_string($msg_runtime);
+my @errors_runtime = $parser->parse_string($msg_runtime);
 ok(@errors_runtime, 'msg_runtime results');
 ok($errors_runtime[0]->message == 'Use of uninitialized value $empty in length', 'msg_runtime 1 message');
 ok($errors_runtime[0]->file == 'error.pl', 'msg_runtime 1 file');
@@ -62,7 +63,7 @@ Global symbol "$length" requires explicit package name at error.pl line 7.
 Execution of error.pl aborted due to compilation errors.
 ENDofMSG
 
-my @errors_near = parse_string($msg_near);
+my @errors_near = $parser->parse_string($msg_near);
 ok(@errors_near, 'msg_near results');
 ok($errors_near[0]->message == 'syntax error', 'msg_near 1 message');
 ok($errors_near[0]->file == 'error.pl', 'msg_near 1 file');
@@ -91,7 +92,7 @@ Execution of error.pl aborted due to compilation errors.
  at error2.pl line 6
 ENDofMSG
 
-my @errors_diagnostics = parse_string($msg_diagnostics);
+my @errors_diagnostics = $parser->parse_string($msg_diagnostics);
 ok(@errors_diagnostics, 'msg_diagnostics results');
 ok($errors_diagnostics[0]->message == 'syntax Global symbol "$hell" requires explicit package name', 'msg_diagnostics 1 message');
 ok($errors_diagnostics[0]->file == 'error.pl', 'msg_diagnostics 1 file');

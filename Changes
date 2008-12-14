@@ -1,5 +1,9 @@
 Revision history for Parse-ErrorString-Perl
 
+0.02    15 Dec 2008
+        Added support for diagnostic messages
+
 0.01    12 Dec 2008
         First release. Only message, file_path and line are currently supported. Tests need to be added
+
 

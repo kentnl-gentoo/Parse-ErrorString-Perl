@@ -4,4 +4,5 @@ MANIFEST
 README
 lib/Parse/ErrorString/Perl.pm
 t/00-load.t
-t/01-errors
+t/01-errors.t
+t/02-diagnostics.t

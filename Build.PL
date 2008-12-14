@@ -9,8 +9,11 @@ my $builder = Module::Build->new(
     dist_version_from   => 'lib/Parse/ErrorString/Perl.pm',
     build_requires => {
         'Test::More' => 0,
+		'Test::Simple' => 0,
 		'Class::XSAccessor' => 0,
 		'Pod::Find' => 0,
+		'Pod::POM' => 0,
+
     },
     add_to_cleanup      => [ 'Parse-ErrorString-Perl-*' ],
     create_makefile_pl => 'traditional',
