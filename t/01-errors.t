@@ -1,8 +1,6 @@
 #!perl -T
 
-use lib '../lib';
-
-use Test::Simple tests => 22;
+use Test::More tests => 22;
 use Parse::ErrorString::Perl;
 
 my $parser = Parse::ErrorString::Perl->new;
@@ -19,8 +17,8 @@ ENDofMSG
 
 my @errors_compile = $parser->parse_string($msg_compile);
 ok(@errors_compile, 'msg_compile results');
-ok($errors_compile[0]->message == 'Global symbol "$hell" requires explicit package name', 'msg_compile message');
-ok($errors_compile[0]->file == 'error.pl', 'msg_compile file');
+ok($errors_compile[0]->message eq 'Global symbol "$hell" requires explicit package name', 'msg_compile message');
+ok($errors_compile[0]->file_msgpath eq 'error.pl', 'msg_compile file');
 ok($errors_compile[0]->line == 8, 'msg_compile line');
 
 
@@ -40,11 +38,11 @@ ENDofMSG
 
 my @errors_runtime = $parser->parse_string($msg_runtime);
 ok(@errors_runtime, 'msg_runtime results');
-ok($errors_runtime[0]->message == 'Use of uninitialized value $empty in length', 'msg_runtime 1 message');
-ok($errors_runtime[0]->file == 'error.pl', 'msg_runtime 1 file');
+ok($errors_runtime[0]->message eq 'Use of uninitialized value $empty in length', 'msg_runtime 1 message');
+ok($errors_runtime[0]->file_msgpath eq 'error.pl', 'msg_runtime 1 file');
 ok($errors_runtime[0]->line == 5, 'msg_runtime 1 line');
-ok($errors_runtime[1]->message == 'Illegal division by zero', 'msg_runtime 2 message');
-ok($errors_runtime[1]->file == 'error.pl', 'msg_runtime 2 file');
+ok($errors_runtime[1]->message eq 'Illegal division by zero', 'msg_runtime 2 message');
+ok($errors_runtime[1]->file_msgpath eq 'error.pl', 'msg_runtime 2 file');
 ok($errors_runtime[1]->line == 8, 'msg_runtime 2 line');
 
 # use strict;
@@ -56,7 +54,7 @@ ok($errors_runtime[1]->line == 8, 'msg_runtime 2 line');
 # my $length = 5;
 
 my $msg_near = <<'ENDofMSG';
-syntax error at error2.pl line 7, near "kaboom
+syntax error at error.pl line 7, near "kaboom
 
 my "
 Global symbol "$length" requires explicit package name at error.pl line 7.
@@ -65,11 +63,11 @@ ENDofMSG
 
 my @errors_near = $parser->parse_string($msg_near);
 ok(@errors_near, 'msg_near results');
-ok($errors_near[0]->message == 'syntax error', 'msg_near 1 message');
-ok($errors_near[0]->file == 'error.pl', 'msg_near 1 file');
+ok($errors_near[0]->message eq 'syntax error', 'msg_near 1 message');
+ok($errors_near[0]->file_msgpath eq 'error.pl', 'msg_near 1 file');
 ok($errors_near[0]->line == 7, 'msg_near 1 line');
-ok($errors_near[1]->message == 'Global symbol "$length" requires explicit package name', 'msg_near 2 message');
-ok($errors_near[1]->file == 'error.pl', 'msg_near 2 file');
+ok($errors_near[1]->message eq 'Global symbol "$length" requires explicit package name', 'msg_near 2 message');
+ok($errors_near[1]->file_msgpath eq 'error.pl', 'msg_near 2 file');
 ok($errors_near[1]->line == 7, 'msg_near 2 line');
 
 # use strict;
@@ -94,6 +92,6 @@ ENDofMSG
 
 my @errors_diagnostics = $parser->parse_string($msg_diagnostics);
 ok(@errors_diagnostics, 'msg_diagnostics results');
-ok($errors_diagnostics[0]->message == 'syntax Global symbol "$hell" requires explicit package name', 'msg_diagnostics 1 message');
-ok($errors_diagnostics[0]->file == 'error.pl', 'msg_diagnostics 1 file');
+ok($errors_diagnostics[0]->message eq 'Global symbol "$hell" requires explicit package name', 'msg_diagnostics 1 message');
+ok($errors_diagnostics[0]->file_msgpath eq 'error.pl', 'msg_diagnostics 1 file');
 ok($errors_diagnostics[0]->line == 5, 'msg_diagnostics 1 line');

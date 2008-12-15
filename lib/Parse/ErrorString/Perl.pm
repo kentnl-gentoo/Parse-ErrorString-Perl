@@ -40,11 +40,11 @@ Each object contains the following accessors (only C<message>, C<file>, and C<li
 
 =item type
 
-A single letter idnetifying the type of the error. The possbile options are C<W>, C<D>, C<S>, C<F>, C<P>, C<X>, and C<A>.
+A single letter idnetifying the type of the error (not implemented yet). The possbile options are C<W>, C<D>, C<S>, C<F>, C<P>, C<X>, and C<A>.
 
 =item type_description
 
-A description of the error type. The possible options are:
+A description of the error type (not implemented yet). The possible options are:
 
     W => warning 
     D => deprecation
@@ -60,11 +60,15 @@ The error message.
 
 =item file
 
-The name of the file in which the error occurred, with the path possibly trunicated. If the error occurred in a script, the parser will attempt to return only the filename; if the error occurred in a module, the parser will attempt to return the path to the module relative to the directory in @INC in which it resides.
+The path to the file in which the error occurred, possibly trunicated. If the error occurred in a script, the parser will attempt to return only the filename; if the error occurred in a module, the parser will attempt to return the path to the module relative to the directory in @INC in which it resides (not implemented yet).
 
-=item file_path
+=item file_abspath
 
 Absolute path to the file in which the error occurred.
+
+=item file_msgpath
+
+The file path as displayed in which the error message.
 
 =item line
 
@@ -149,8 +153,9 @@ use Class::XSAccessor
 	type => 'type',
 	type_description => 'type_description',
 	message => 'message',
-	file => 'data',
-	file_path => 'file_path',
+	file => 'file',
+	file_abspath => 'file_abspath',
+	file_msgpath => 'file_msgpath',
 	line => 'line',
 	near => 'near',
 	diagnostics => 'diagnostics',
@@ -165,11 +170,12 @@ sub new {
 
 package Parse::ErrorString::Perl;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use Carp;
 use Pod::Find;
 use Pod::POM;
+use File::Spec;
 
 sub new {
     my $class = shift;
@@ -321,7 +327,8 @@ sub _parse_to_hash {
 	    if ($line =~ /^(.*)\sat\s(.*)\sline\s(\d+)(\.|,\snear\s\"(.*)(\")*)$/) {
 		my %err_item = (
 		    message => $1,
-		    file    => $2,
+		    file_msgpath    => $2,
+			file_abspath => File::Spec->rel2abs($2),
 		    line  => $3,
 			diagnostics => $self->_get_diagnostics($1),
 		);

@@ -1,0 +1,27 @@
+---
+name: Parse-ErrorString-Perl
+version: 0.03
+author:
+  - 'Petar Shangov <pshangov@yahoo.com>'
+abstract: Parse error messages from the perl interpreter
+license: perl
+resources:
+  license: http://dev.perl.org/licenses/
+build_requires:
+  Class::XSAccessor: 0
+  File::Spec: 0
+  Pod::Find: 0
+  Pod::POM: 0
+  Test::More: 0
+provides:
+  Parse::ErrorString::Perl:
+    file: lib/Parse/ErrorString/Perl.pm
+    version: 0.03
+  Parse::ErrorString::Perl::ErrorItem:
+    file: lib/Parse/ErrorString/Perl.pm
+  Parse::ErrorString::Perl::StackItem:
+    file: lib/Parse/ErrorString/Perl.pm
+generated_by: Module::Build version 0.280801
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2
