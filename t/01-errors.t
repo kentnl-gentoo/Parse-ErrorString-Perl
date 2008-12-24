@@ -1,6 +1,6 @@
 #!perl -T
 
-use Test::More tests => 22;
+use Test::More tests => 33;
 use Parse::ErrorString::Perl;
 
 my $parser = Parse::ErrorString::Perl->new;
@@ -11,13 +11,13 @@ my $parser = Parse::ErrorString::Perl->new;
 # $hell;
 
 my $msg_compile = <<'ENDofMSG';
-Global symbol "$hell" requires explicit package name at error.pl line 8.
+Global symbol "$kaboom" requires explicit package name at error.pl line 8.
 Execution of error.pl aborted due to compilation errors.
 ENDofMSG
 
 my @errors_compile = $parser->parse_string($msg_compile);
 ok(@errors_compile, 'msg_compile results');
-ok($errors_compile[0]->message eq 'Global symbol "$hell" requires explicit package name', 'msg_compile message');
+ok($errors_compile[0]->message eq 'Global symbol "$kaboom" requires explicit package name', 'msg_compile message');
 ok($errors_compile[0]->file_msgpath eq 'error.pl', 'msg_compile file');
 ok($errors_compile[0]->line == 8, 'msg_compile line');
 
@@ -66,32 +66,49 @@ ok(@errors_near, 'msg_near results');
 ok($errors_near[0]->message eq 'syntax error', 'msg_near 1 message');
 ok($errors_near[0]->file_msgpath eq 'error.pl', 'msg_near 1 file');
 ok($errors_near[0]->line == 7, 'msg_near 1 line');
+ok($errors_near[0]->near eq 'kaboom
+
+my ', 'msg_near 1 near');
 ok($errors_near[1]->message eq 'Global symbol "$length" requires explicit package name', 'msg_near 2 message');
 ok($errors_near[1]->file_msgpath eq 'error.pl', 'msg_near 2 file');
 ok($errors_near[1]->line == 7, 'msg_near 2 line');
 
-# use strict;
-# use warnings;
-# use diagnostics;
+#use strict;
+#use warnings;
 #
-# $hell;
+#if (1) { if (2)
 
-my $msg_diagnostics = <<'ENDofMSG';
-Global symbol "$hell" requires explicit package name at error.pl line 5.
-Execution of error2.pl aborted due to compilation errors (#1)
-    (F) You've said "use strict" or "use strict vars", which indicates
-    that all variables must either be lexically scoped (using "my" or "state"),
-    declared beforehand using "our", or explicitly qualified to say
-    which package the global variable is in (using "::").
-
-Uncaught exception from user code:
-        Global symbol "$hell" requires explicit package name at error.pl line 5.
+my $msg_at = <<'ENDofMSG';
+syntax error at error.pl line 4, at EOF
+Missing right curly or square bracket at error.pl line 4, at end of line
 Execution of error.pl aborted due to compilation errors.
- at error2.pl line 6
 ENDofMSG
 
-my @errors_diagnostics = $parser->parse_string($msg_diagnostics);
-ok(@errors_diagnostics, 'msg_diagnostics results');
-ok($errors_diagnostics[0]->message eq 'Global symbol "$hell" requires explicit package name', 'msg_diagnostics 1 message');
-ok($errors_diagnostics[0]->file_msgpath eq 'error.pl', 'msg_diagnostics 1 file');
-ok($errors_diagnostics[0]->line == 5, 'msg_diagnostics 1 line');
+my @errors_at = $parser->parse_string($msg_at);
+ok(@errors_at, 'msg_at results');
+ok($errors_at[0]->message eq 'syntax error', 'msg_at 1 message');
+ok($errors_at[0]->file_msgpath eq 'error.pl', 'msg_at 1 file');
+ok($errors_at[0]->line == 4, 'msg_at 1 line');
+ok($errors_at[0]->at eq 'EOF', 'msg_at 1 at');
+ok($errors_at[1]->message eq 'Missing right curly or square bracket', 'msg_at 2 message');
+ok($errors_at[1]->file_msgpath eq 'error.pl', 'msg_at 2 file');
+ok($errors_at[1]->line == 4, 'msg_at 2 line');
+ok($errors_at[1]->at eq 'end of line', 'msg_at 2 at');
+
+# use strict;
+# use warnings;
+#
+# eval 'sub test {print}';
+# test();
+
+my $msg_eval = <<'ENDofMSG';
+Use of uninitialized value $_ in print at (eval 1) line 1.
+ENDofMSG
+
+my @errors_eval = $parser->parse_string($msg_eval);
+ok(@errors_eval, 'msg_eval results');
+ok($errors_eval[0]->message eq 'Use of uninitialized value $_ in print', 'msg_eval 1 message');
+ok($errors_eval[0]->file_msgpath eq '(eval 1)', 'msg_eval 1 file');
+ok($errors_eval[0]->file eq 'eval', 'msg_eval 1 eval');
+ok($errors_eval[0]->line == 1, 'msg_eval 1 line');
+

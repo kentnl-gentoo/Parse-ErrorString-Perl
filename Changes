@@ -1,5 +1,15 @@
 Revision history for Parse-ErrorString-Perl
 
+0.07    24 Dec 2008
+        * properly parse error messages messed with by "diagnostics"
+		* properly parse errors with "near" or "at" info at the end
+		* properly parse errors in eval
+		* provide information about the error type
+		* callstack for fatal errors if "use diagnostics" is in force
+		* support for curtailed file paths
+		* fall back to default perldiag if localized does not provide info about an error message
+		* added script "check_perlidag" to check a localized perldiag for consistency
+
 0.03    16 Dec 2008
         Fixes of tests
 

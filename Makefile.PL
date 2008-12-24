@@ -12,7 +12,12 @@ WriteMakefile
                            'Test::More' => 0
                          },
           'INSTALLDIRS' => 'site',
-          'EXE_FILES' => [],
+          'EXE_FILES' => [
+                           'bin\\check_perldiag',
+                           'bin\\pod2htmd.tmp',
+                           'bin\\pod2htmi.tmp',
+                           'bin\\test.html'
+                         ],
           'PL_FILES' => {}
         )
 ;
