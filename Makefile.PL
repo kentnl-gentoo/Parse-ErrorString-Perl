@@ -6,17 +6,15 @@ WriteMakefile
           'VERSION_FROM' => 'lib/Parse/ErrorString/Perl.pm',
           'PREREQ_PM' => {
                            'Class::XSAccessor' => 0,
-                           'File::Spec' => '0',
+                           'File::Basename' => 0,
+                           'File::Spec' => 0,
                            'Pod::Find' => 0,
                            'Pod::POM' => 0,
                            'Test::More' => 0
                          },
           'INSTALLDIRS' => 'site',
           'EXE_FILES' => [
-                           'bin\\check_perldiag',
-                           'bin\\pod2htmd.tmp',
-                           'bin\\pod2htmi.tmp',
-                           'bin\\test.html'
+                           'bin\\check_perldiag'
                          ],
           'PL_FILES' => {}
         )

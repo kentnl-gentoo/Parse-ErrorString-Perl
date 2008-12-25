@@ -223,12 +223,13 @@ sub new {
 
 sub stack {
 	my $self = shift;
-	return @{ $self->{stack} };
+	return $self->{stack} ? @{ $self->{stack} } : undef;
+
 }
 
 package Parse::ErrorString::Perl;
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 use Carp;
 use Pod::Find;
@@ -361,8 +362,11 @@ EOFUNC
     $transmo .= "    return 0;\n}\n";
 
 	# installs a sub named 'transmo', which returns the type of the error message
-    eval $transmo;
-    carp $@ if $@;
+	{
+		no warnings 'redefine';
+		eval $transmo;
+    	carp $@ if $@;
+	}
 }
 
 sub _get_diagnostics {
@@ -541,6 +545,7 @@ sub _parse_to_hash {
 					sub => $1,
 					file_msgpath => $2,
 					file_abspath => File::Spec->rel2abs($2),
+					file => $self->_get_short_path($2),
 					line => $3,
 				);
 				my $stack_object = Parse::ErrorString::Perl::StackItem->new(\%trace_item);

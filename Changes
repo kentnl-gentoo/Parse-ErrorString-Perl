@@ -1,5 +1,8 @@
 Revision history for Parse-ErrorString-Perl
 
+0.08    26 Dec 2008
+        Minor bug fixes
+
 0.07    24 Dec 2008
         * properly parse error messages messed with by "diagnostics"
 		* properly parse errors with "near" or "at" info at the end
