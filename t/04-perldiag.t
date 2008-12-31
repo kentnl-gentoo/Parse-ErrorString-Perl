@@ -2,6 +2,7 @@
 
 use Test::More tests => 4;
 use Parse::ErrorString::Perl;
+use Test::Differences;
 
 
 # use strict;
@@ -10,7 +11,7 @@ use Parse::ErrorString::Perl;
 # $hell;
 
 my $msg_compile = <<'ENDofMSG';
-Global symbol "$hell" requires explicit package name at error.pl line 8.
+Global symbol "$kaboom" requires explicit package name at error.pl line 8.
 Execution of error.pl aborted due to compilation errors.
 ENDofMSG
 
@@ -25,8 +26,9 @@ chomp($diagnostics);
 
 my $parser = Parse::ErrorString::Perl->new;
 my @errors_compile = $parser->parse_string($msg_compile);
-ok($errors_compile[0]->message eq 'Global symbol "$hell" requires explicit package name', 'message');
-ok($errors_compile[0]->diagnostics eq $diagnostics, 'diagnostics');
+ok($errors_compile[0]->message eq 'Global symbol "$kaboom" requires explicit package name', 'message');
+#ok($errors_compile[0]->diagnostics eq $diagnostics, 'diagnostics');
+eq_or_diff($errors_compile[0]->diagnostics, $diagnostics, 'diagnostics');
 ok($errors_compile[0]->type eq 'F', 'type');
 ok($errors_compile[0]->type_description eq 'fatal error', 'diagnostics');
 

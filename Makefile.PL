@@ -10,11 +10,12 @@ WriteMakefile
                            'File::Spec' => 0,
                            'Pod::Find' => 0,
                            'Pod::POM' => 0,
+                           'Test::Differences' => 0,
                            'Test::More' => 0
                          },
           'INSTALLDIRS' => 'site',
           'EXE_FILES' => [
-                           'bin\\check_perldiag'
+                           'bin/check_perldiag'
                          ],
           'PL_FILES' => {}
         )

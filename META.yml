@@ -1,6 +1,6 @@
 ---
 name: Parse-ErrorString-Perl
-version: 0.08
+version: 0.09
 author:
   - 'Petar Shangov <pshangov@yahoo.com>'
 abstract: Parse error messages from the perl interpreter
@@ -14,11 +14,12 @@ requires:
   Pod::Find: 0
   Pod::POM: 0
 build_requires:
+  Test::Differences: 0
   Test::More: 0
 provides:
   Parse::ErrorString::Perl:
     file: lib/Parse/ErrorString/Perl.pm
-    version: 0.08
+    version: 0.09
   Parse::ErrorString::Perl::ErrorItem:
     file: lib/Parse/ErrorString/Perl.pm
   Parse::ErrorString::Perl::StackItem:

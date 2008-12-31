@@ -1,5 +1,10 @@
 Revision history for Parse-ErrorString-Perl
 
+0.09    31 Dec 2008
+        * fixed Makefile.pl to properly build on unix (Gabor Szabo)
+		* fixed t/06-short_filename.t to run properly under unix (Gabor Szabo, Breno G. de Oliveira)
+		* fixed typos in the documentation (Breno G. de Oliveira)
+
 0.08    26 Dec 2008
         Minor bug fixes
 
