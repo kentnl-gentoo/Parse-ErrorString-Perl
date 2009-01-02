@@ -4,7 +4,7 @@ Parse::ErrorString::Perl - Parse error messages from the perl interpreter
 
 =head1 VERSION
 
-Version 0.10
+Version 0.11
 
 =head1 SYNOPSIS
 
@@ -229,7 +229,7 @@ sub stack {
 
 package Parse::ErrorString::Perl;
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 
 use Carp;
 use Pod::Find;
@@ -259,6 +259,15 @@ sub new {
 sub parse_string {
 	my $self = shift;
 	my $string = shift;
+
+	# installs a sub named 'transmo', which returns the type of the error message
+	if ($self->{transmo}) {
+		no warnings 'redefine';
+		eval $self->{transmo};
+		carp $@ if $@;
+		$self->{transmo} = undef;
+	}
+
 	my @hash_items = $self->_parse_to_hash($string);
 	my @object_items;
 
@@ -356,13 +365,8 @@ sub _prepare_diagnostics {
 		$transmo .= $transfmt{$hdr}{pat};
 	}
 	$transmo = "sub transmo {\n study;\n $transmo;  return 0;\n}\n";
+	$self->{transmo} = $transmo;
 
-	# installs a sub named 'transmo', which returns the type of the error message
-	{
-		no warnings 'redefine';
-		eval $transmo;
-		carp $@ if $@;
-	}
 	return;
 }
 
