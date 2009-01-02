@@ -4,7 +4,7 @@ Parse::ErrorString::Perl - Parse error messages from the perl interpreter
 
 =head1 VERSION
 
-Version 0.09
+Version 0.10
 
 =head1 SYNOPSIS
 
@@ -229,7 +229,7 @@ sub stack {
 
 package Parse::ErrorString::Perl;
 
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 
 use Carp;
 use Pod::Find;
@@ -304,10 +304,6 @@ sub _prepare_diagnostics {
 	}
 	
 	my %transfmt = (); 
-	my $transmo = <<'EOFUNC';
-sub transmo {
-    study;
-EOFUNC
 	my %errors;
 	foreach my $item ($pom->head1->[1]->over->[0]->item) {
 		my $header = $item->title;
@@ -326,7 +322,7 @@ EOFUNC
 			my $conlen = 0;
 			for my $i (0..$#toks){
 				if( $i % 2 ) {
-					if(      $toks[$i] eq '%c' ) {
+					if( $toks[$i] eq '%c' ) {
 						$toks[$i] = '.';
 					} elsif( $toks[$i] eq '%d' ) {
 						$toks[$i] = '\d+';
@@ -355,10 +351,11 @@ EOFUNC
 
 	# Apply patterns in order of decreasing sum of lengths of fixed parts
 	# Seems the best way of hitting the right one.
+	my $transmo = '';
 	for my $hdr ( sort { $transfmt{$b}{len} <=> $transfmt{$a}{len} } keys %transfmt ) {
 		$transmo .= $transfmt{$hdr}{pat};
 	}
-	$transmo .= "    return 0;\n}\n";
+	$transmo = "sub transmo {\n study;\n $transmo;  return 0;\n}\n";
 
 	# installs a sub named 'transmo', which returns the type of the error message
 	{
@@ -366,12 +363,18 @@ EOFUNC
 		eval $transmo;
 		carp $@ if $@;
 	}
+	return;
 }
 
 sub _get_diagnostics {
 	my $self = shift;
 	local $_ = shift;
-	transmo();
+	eval {
+		transmo();
+	};
+	if ($@) {
+		Carp::cluck($@);
+	}
 	return $self->{localized_errors}{$_} ? $self->{localized_errors}{$_} : $self->{errors}{$_};
 }
 
