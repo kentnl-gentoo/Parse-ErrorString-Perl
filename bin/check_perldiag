@@ -2,7 +2,7 @@
 
 package check_perldiag;
 BEGIN {
-  $check_perldiag::VERSION = '0.14';
+  $check_perldiag::VERSION = '0.15';
 }
 
 # ABSTRACT: check a localized version of L<peldiag> for consistency
@@ -60,7 +60,7 @@ check_perldiag - check a localized version of L<peldiag> for consistency
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 SYNOPSIS
 

@@ -1,6 +1,6 @@
 package Parse::ErrorString::Perl::ErrorItem;
 BEGIN {
-  $Parse::ErrorString::Perl::ErrorItem::VERSION = '0.14';
+  $Parse::ErrorString::Perl::ErrorItem::VERSION = '0.15';
 }
 
 #ABSTRACT: a Perl error item object
@@ -45,7 +45,7 @@ Parse::ErrorString::Perl::ErrorItem - a Perl error item object
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 Parse::ErrorString::Perl::ErrorItem
 

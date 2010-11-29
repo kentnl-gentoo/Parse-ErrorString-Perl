@@ -1,6 +1,6 @@
 package Parse::ErrorString::Perl;
 BEGIN {
-  $Parse::ErrorString::Perl::VERSION = '0.14';
+  $Parse::ErrorString::Perl::VERSION = '0.15';
 }
 
 # ABSTRACT: Parse error messages from the perl interpreter
@@ -9,8 +9,8 @@ use strict;
 use warnings;
 
 use Carp qw(carp cluck);
-use Pod::Find                           ();
-use Pod::POM                            ();
+use Pod::Find ();
+use Pod::POM 0.27 ();
 use File::Spec                          ();
 use File::Basename                      ();
 use Parse::ErrorString::Perl::ErrorItem ();
@@ -436,7 +436,7 @@ Parse::ErrorString::Perl - Parse error messages from the perl interpreter
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 SYNOPSIS
 

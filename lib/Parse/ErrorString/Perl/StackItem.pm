@@ -1,6 +1,6 @@
 package Parse::ErrorString::Perl::StackItem;
 BEGIN {
-  $Parse::ErrorString::Perl::StackItem::VERSION = '0.14';
+  $Parse::ErrorString::Perl::StackItem::VERSION = '0.15';
 }
 
 #ABSTRACT: a Perl stack item object
@@ -34,7 +34,7 @@ Parse::ErrorString::Perl::StackItem - a Perl stack item object
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 Parse::ErrorString::Perl::StackItem
 

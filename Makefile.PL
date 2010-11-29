@@ -32,9 +32,9 @@ my %WriteMakefileArgs = (
     'File::Basename' => '0',
     'File::Spec' => '0',
     'Pod::Find' => '0',
-    'Pod::POM' => '0'
+    'Pod::POM' => '0.27'
   },
-  'VERSION' => '0.14',
+  'VERSION' => '0.15',
   'test' => {
     'TESTS' => 't/*.t'
   }
