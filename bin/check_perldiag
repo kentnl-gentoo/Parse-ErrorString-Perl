@@ -1,9 +1,6 @@
 #!/usr/bin/perl -w
 
 package check_perldiag;
-BEGIN {
-  $check_perldiag::VERSION = '0.15';
-}
 
 # ABSTRACT: check a localized version of L<peldiag> for consistency
 
@@ -50,17 +47,7 @@ for (my $i = 0; $i <= $#local_errors; $i++) {
 	}
 }
 
-
-
-=pod
-
-=head1 NAME
-
-check_perldiag - check a localized version of L<peldiag> for consistency
-
-=head1 VERSION
-
-version 0.15
+__END__
 
 =head1 SYNOPSIS
 
@@ -71,34 +58,3 @@ From the command line:
 =head1 DESCRIPTION
 
 This script compares a translated version of L<peldiag> with the default L<peldiag> installed with perl. It compares each error message in the two files and tells you if they do not match. A warning is issued if the two files contain a different number of error messages defined.
-
-=head1 AUTHORS
-
-=over 4
-
-=item *
-
-Petar Shangov, C<< <pshangov at yahoo.com> >>
-
-=item *
-
-Gabor Szabo L<http://szabgab.com/>
-
-=item *
-
-Ahmad M. Zawawi <ahmad.zawawi@gmail.com>
-
-=back
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is copyright (c) 2010 by Petar Shangov.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
-
-=cut
-
-
-__END__
-

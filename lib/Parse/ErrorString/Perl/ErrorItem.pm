@@ -1,12 +1,11 @@
 package Parse::ErrorString::Perl::ErrorItem;
-BEGIN {
-  $Parse::ErrorString::Perl::ErrorItem::VERSION = '0.15';
-}
 
 #ABSTRACT: a Perl error item object
 
 use strict;
 use warnings;
+
+our $VERSION = '0.16';
 
 use Class::XSAccessor getters => {
 	type             => 'type',
@@ -35,17 +34,7 @@ sub stack {
 
 1;
 
-
-
-=pod
-
-=head1 NAME
-
-Parse::ErrorString::Perl::ErrorItem - a Perl error item object
-
-=head1 VERSION
-
-version 0.15
+__END__
 
 =head1 Parse::ErrorString::Perl::ErrorItem
 
@@ -61,7 +50,7 @@ possbile options are C<W>, C<D>, C<S>, C<F>, C<P>, C<X>, and C<A>.
 Sometimes an error can be of either of two types, in which case a string
 such as "C<S|F>" is returned in scalar context and a list of the two
 letters is returned in list context. If C<type> is empty, you can assume
-that the error was not emimtted by perl itself, but by the user or by a
+that the error was not emitted by perl itself, but by the user or by a
 third-party module.
 
 =item type_description
@@ -127,34 +116,3 @@ use a pod parser to render into the format you need.
 Callstack for the error. Returns a list of Parse::ErrorString::Perl::StackItem objects.
 
 =back
-
-=head1 AUTHORS
-
-=over 4
-
-=item *
-
-Petar Shangov, C<< <pshangov at yahoo.com> >>
-
-=item *
-
-Gabor Szabo L<http://szabgab.com/>
-
-=item *
-
-Ahmad M. Zawawi <ahmad.zawawi@gmail.com>
-
-=back
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is copyright (c) 2010 by Petar Shangov.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
-
-=cut
-
-
-__END__
-

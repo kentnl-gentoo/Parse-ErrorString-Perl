@@ -1,12 +1,12 @@
 package Parse::ErrorString::Perl;
-BEGIN {
-  $Parse::ErrorString::Perl::VERSION = '0.15';
-}
 
 # ABSTRACT: Parse error messages from the perl interpreter
 
+use v5.8.7;
 use strict;
 use warnings;
+
+our $VERSION = '0.16';
 
 use Carp qw(carp cluck);
 use Pod::Find ();
@@ -127,10 +127,10 @@ sub _prepare_diagnostics {
 				}
 			}
 			my $lhs = join( '', @toks );
-			$transfmt{$header}{pat} = "    s{^$lhs}\n     {\Q$header\E}s\n\t&& return 1;\n";
+			$transfmt{$header}{pat} = "    s<^$lhs>\n     <\Q$header\E>s\n\t&& return 1;\n";
 			$transfmt{$header}{len} = $conlen;
 		} else {
-			$transfmt{$header}{pat} = "    m{^\Q$header\E} && return 1;\n";
+			$transfmt{$header}{pat} = "    m<^\Q$header\E> && return 1;\n";
 			$transfmt{$header}{len} = length($header);
 		}
 	}
@@ -426,17 +426,7 @@ sub _prepare_localized_diagnostics {
 
 1;
 
-
-
-=pod
-
-=head1 NAME
-
-Parse::ErrorString::Perl - Parse error messages from the perl interpreter
-
-=head1 VERSION
-
-version 0.15
+__END__
 
 =head1 SYNOPSIS
 
@@ -453,6 +443,7 @@ version 0.15
         '" in file ' . $error->file .
         ' on line ' . $error->line . "\n";
     }
+
 
 =head1 METHODS
 
@@ -494,6 +485,7 @@ You can find documentation for this module with the perldoc command.
 
     perldoc Parse::ErrorString::Perl
 
+
 =over 4
 
 =item * RT: CPAN's request tracker
@@ -514,33 +506,4 @@ L<http://search.cpan.org/dist/Parse-ErrorString-Perl/>
 
 =back
 
-=head1 AUTHORS
-
-=over 4
-
-=item *
-
-Petar Shangov, C<< <pshangov at yahoo.com> >>
-
-=item *
-
-Gabor Szabo L<http://szabgab.com/>
-
-=item *
-
-Ahmad M. Zawawi <ahmad.zawawi@gmail.com>
-
-=back
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is copyright (c) 2010 by Petar Shangov.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
-
 =cut
-
-
-__END__
-
