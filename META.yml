@@ -34,4 +34,4 @@ resources:
   homepage: http://padre.perlide.org/
   license: http://dev.perl.org/licenses/
   repository: http://svn.perlide.org/padre/trunk/Parse-ErrorString-Perl
-version: 0.16
+version: 0.17
