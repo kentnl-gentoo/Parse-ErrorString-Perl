@@ -6,6 +6,7 @@ author:
   - 'Ahmad M. Zawawi <ahmad.zawawi@gmail.com>'
 build_requires:
   ExtUtils::MakeMaker: 6.59
+  Test::Differences: 0
   Test::More: 0.47
 configure_requires:
   ExtUtils::MakeMaker: 6.59
@@ -34,4 +35,4 @@ resources:
   homepage: http://padre.perlide.org/
   license: http://dev.perl.org/licenses/
   repository: http://svn.perlide.org/padre/trunk/Parse-ErrorString-Perl
-version: 0.18
+version: 0.19
