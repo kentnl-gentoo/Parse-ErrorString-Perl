@@ -31,8 +31,8 @@ requires:
   Pod::POM: 0.27
   perl: 5.8.7
 resources:
-  bugtracker: http://padre.perlide.org/
+  bugtracker: http://padre.perlide.org/trac/
   homepage: http://padre.perlide.org/
   license: http://dev.perl.org/licenses/
   repository: http://svn.perlide.org/padre/trunk/Parse-ErrorString-Perl
-version: 0.19
+version: 0.20
