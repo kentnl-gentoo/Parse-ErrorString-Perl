@@ -23,6 +23,6 @@ no_index       'directory'         => qw{ t xt eg share inc};
 install_script 'bin/check_perldiag';
 homepage       'http://padre.perlide.org/';
 bugtracker     'http://padre.perlide.org/trac/';
-repository     'http://svn.perlide.org/padre/trunk/Parse-ErrorString-Perl';
+repository     'https://github.com/PadreIDE/Parse-ErrorString-Perl';
 
 WriteAll;
