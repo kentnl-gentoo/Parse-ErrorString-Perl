@@ -1,6 +1,8 @@
+MANIFEST
 META.*
 MYMETA.*
 Makefile
 blib/
 inc/
 pm_to_blib
+Parse-ErrorString-Perl-*
