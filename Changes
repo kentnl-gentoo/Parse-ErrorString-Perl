@@ -70,12 +70,12 @@ Revision history for Parse-ErrorString-Perl
         * Added script "check_perlidag" to check a localized perldiag
           for consistency
 
-0.03    16 Dec 2008
+0.03    2008.12.16
         * Test fixes
 
-0.02    15 Dec 2008
+0.02    2008.12.15
         * Added support for diagnostic messages
 
-0.01    12 Dec 2008
+0.01    2008.12.12
         * First release. Only message, file_path and line are
           currently supported. Tests need to be added.
