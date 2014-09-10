@@ -22,7 +22,7 @@ test_requires  'Test::More'        => '0.47';
 no_index       'directory'         => qw{ t xt eg share inc};
 install_script 'bin/check_perldiag';
 homepage       'http://padre.perlide.org/';
-bugtracker     'http://padre.perlide.org/trac/';
+bugtracker     'https://github.com/PadreIDE/Parse-ErrorString-Perl';
 repository     'https://github.com/PadreIDE/Parse-ErrorString-Perl';
 
 WriteAll;
