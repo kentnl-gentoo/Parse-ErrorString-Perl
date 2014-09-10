@@ -473,14 +473,6 @@ L<splain>
 
 Part of this module is based on code from L<splain>.
 
-=head1 BUGS
-
-Please report any bugs or feature requests to
-C<bug-parse-errorstring-perl at rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Parse-ErrorString-Perl>.
-I will be notified, and then you'll automatically be notified of
-progress on your bug as I make changes.
-
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
