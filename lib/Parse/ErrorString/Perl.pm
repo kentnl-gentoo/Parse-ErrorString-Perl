@@ -4,7 +4,7 @@ use v5.8.7;
 use strict;
 use warnings;
 
-our $VERSION = '0.21';
+our $VERSION = '0.22';
 
 use Carp qw(carp cluck);
 use Pod::Find ();
@@ -93,6 +93,7 @@ sub _prepare_diagnostics {
 	my %errors;
 	foreach my $item ( $pom->head1->[1]->over->[0]->item ) {
 		my $header = $item->title;
+		$header =~ s/\n/ /g;
 
 		my $content = $item->content;
 		$content =~ s/\s*$//;
@@ -472,14 +473,6 @@ L<splain>
 =head1 ACKNOWLEDGEMENTS
 
 Part of this module is based on code from L<splain>.
-
-=head1 BUGS
-
-Please report any bugs or feature requests to
-C<bug-parse-errorstring-perl at rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Parse-ErrorString-Perl>.
-I will be notified, and then you'll automatically be notified of
-progress on your bug as I make changes.
 
 =head1 SUPPORT
 
