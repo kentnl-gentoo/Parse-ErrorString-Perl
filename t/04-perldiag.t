@@ -13,10 +13,27 @@ use Test::Differences;
 #
 # $hell;
 
-my $msg_compile = <<'ENDofMSG';
+my $msg_compile;
+
+if ( $] <  5.021004 ) {
+	$msg_compile = <<'ENDofMSG';
 Global symbol "$kaboom" requires explicit package name at error.pl line 8.
 Execution of error.pl aborted due to compilation errors.
 ENDofMSG
+} else {
+	$msg_compile = <<'ENDofMSG';
+Global symbol "$kaboom" requires explicit package name (did you forget to declare "my $kaboom"?) at error.pl line 8.
+Execution of error.pl aborted due to compilation errors.
+ENDofMSG
+}
+
+my $message;
+
+if ( $] < 5.021004 ) {
+	$message = q{Global symbol "$kaboom" requires explicit package name};
+} else {
+	$message = q{Global symbol "$kaboom" requires explicit package name (did you forget to declare "my $kaboom"?)};
+}
 
 my $diagnostics;
 
@@ -56,7 +73,7 @@ $diagnostics =~ s/\s\n/\n/gs;
 
 my $parser         = Parse::ErrorString::Perl->new;
 my @errors_compile = $parser->parse_string($msg_compile);
-is( $errors_compile[0]->message, 'Global symbol "$kaboom" requires explicit package name', 'message' );
+is( $errors_compile[0]->message, $message, 'message' );
 
 #ok($errors_compile[0]->diagnostics eq $diagnostics, 'diagnostics');
 my $obtained_diagnostics = $errors_compile[0]->diagnostics;

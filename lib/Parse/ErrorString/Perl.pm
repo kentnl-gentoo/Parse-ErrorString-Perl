@@ -93,6 +93,7 @@ sub _prepare_diagnostics {
 	my %errors;
 	foreach my $item ( $pom->head1->[1]->over->[0]->item ) {
 		my $header = $item->title;
+		$header =~ s/\n/ /g;
 
 		my $content = $item->content;
 		$content =~ s/\s*$//;
