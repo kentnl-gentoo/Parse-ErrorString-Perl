@@ -468,11 +468,11 @@ objects providing information for each error.
 
 =head1 SEE ALSO
 
-L<splain>
+L<splain|http://perldoc.perl.org/splain.html>
 
 =head1 ACKNOWLEDGEMENTS
 
-Part of this module is based on code from L<splain>.
+Part of this module is based on code from L<splain|http://perldoc.perl.org/splain.html>.
 
 =head1 SUPPORT
 
