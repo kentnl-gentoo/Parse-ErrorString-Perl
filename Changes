@@ -1,5 +1,8 @@
 Revision history for Parse-ErrorString-Perl
 
+0.25    2017.06.24 MANWAR
+        * Merged PR #6, thanks @majlo.
+
 0.24    2017.06.23 MANWAR
         * Merged PR #5, thanks @knileuh.
 
