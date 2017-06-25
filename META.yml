@@ -35,4 +35,4 @@ resources:
   homepage: http://padre.perlide.org/
   license: http://dev.perl.org/licenses/
   repository: https://github.com/PadreIDE/Parse-ErrorString-Perl
-version: 0.25
+version: 0.26
